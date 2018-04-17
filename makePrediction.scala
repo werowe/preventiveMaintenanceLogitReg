@@ -1,6 +1,10 @@
+import com.databricks.spark.csv
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.ml.classification.{BinaryLogisticRegressionSummary, LogisticRegression}
 import org.apache.spark.mllib.linalg.{Vector, Vectors}
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 import org.apache.spark.ml.feature.{VectorAssembler, StringIndexer}
+import org.apache.spark.ml.classification.LogisticRegressionModel
 
 var file = "hdfs://localhost:9000/maintenance/maintenance_data.csv"
 
@@ -25,7 +29,7 @@ predictions.select ("team", "provider", "features", "label", "prediction")
 
 var df4 = predictions.select ("team", "provider", "features", "label", "prediction")
 
-val model = LogisticRegression.load("hdfs://localhost:9000/maintenance/maintenance_model2")
+val model = LogisticRegression.load("hdfs://localhost:9000/maintenance/maintenance_model")
 
 val df5 = df4.filter("prediction=1")
 
