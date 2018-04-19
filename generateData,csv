@@ -1,0 +1,50 @@
+import org.apache.commons.math3.distribution.NormalDistribution
+import com.databricks.spark.csv
+import org.apache.spark.sql.SQLContext
+
+var file = "hdfs://localhost:9000/maintenance/maintenance_data.csv"
+
+val sqlContext = new SQLContext(sc)
+val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter",";").load(file)
+
+// Array(lifetime, broken, pressureInd, moistureInd, temperatureInd, team, provider)
+
+// y: Array[org.apache.spark.sql.Row] = Array([count,1000], [mean,98.59933810084556], [stddev,19.96405208912615], [min,33.4819173739532], [max,173.282540827248])
+
+
+def generateData (mean: Double, stddev: Double, max: Double, min:Double) : Double = {
+
+var x:NormalDistribution = new NormalDistribution(stddev,mean)
+var y:Double = x.sample()
+while( (y >= max) || (y <= min) ) {
+   y = x.sample()
+   } 
+ return y
+}
+
+def createData(x: org.apache.spark.sql.DataFrame) : Double = {
+
+var y:Array[org.apache.spark.sql.Row] = x.collect();
+var mean:Double = y(1)(1).toString.toDouble;
+var stddev:Double = y(2)(1).toString.toDouble;
+var min:Double = y(3)(1).toString.toDouble;
+var max:Double = y(4)(1).toString.toDouble;
+return generateData(mean,stddev,max,min);
+
+}
+
+var i = 0
+while (i < 10) {
+
+var pressureInd =  createData(df.describe("pressureInd"))
+var moistureInd =  createData(df.describe("moistureInd"))
+var lifetime =  createData(df.describe("lifetime"))
+var temperatureInd =  createData(df.describe("temperatureInd"))
+
+println (lifetime + ";" + pressureInd + ";" + moistureInd+ ";" + temperatureInd)
+i = i + 1
+}
+
+var header = "lifetime;broken;pressureInd;moistureInd;temperatureInd;team;provider"
+
+
