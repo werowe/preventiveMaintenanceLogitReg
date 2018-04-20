@@ -46,7 +46,7 @@ var file = args(2)
 
 val sqlContext = new SQLContext(sc)
 val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter",";").load(file)
-var header = "limetime;pressureInd;moistureInd;temperatureInd;vehicleNo;provider"
+var header = "lifetime;pressureInd;moistureInd;temperatureInd;vehicleNo;provider"
 
 val date = new Date()
 var dformat:SimpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
@@ -86,4 +86,3 @@ bw.close
 
 }
 }
-
