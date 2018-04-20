@@ -1,1 +1,41 @@
 # preventiveMaintenanceLogitReg
+
+This reads data and saves a logistic regression model.  The second program then creates data given the mean, stddev, max, and miean of the variables in that training set.  Then the last program runs predictions and prints out those records that are flagged with 1.  So this is a preventive maintenance application.
+
+Data is here https://raw.githubusercontent.com/ludovicbenistant/Management-Analytics/master/Supply%20Chain/Maintenance%20(survival%20analysis)/maintenance_data.csv.
+
+
+
+spark-submit \
+  --verbose \
+  --class com.bmc.lr.readCSV \
+  --master local[*] \
+   hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
+  hdfs://localhost:9000/maintenance/maintenance_data.csv \
+  hdfs://localhost:9000/maintenance/maintenance_model2
+
+
+
+
+spark-submit \
+  --class com.bmc.lr.makePrediction \
+  --master local[*] \
+   hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
+hdfs://localhost:9000/maintenance/2018.04.20.15.48.54.csv \
+  hdfs://localhost:9000/maintenance/maintenance_model  
+  
+
+
+
+
+
+spark-submit \
+  --class com.bmc.lr.generateData \
+  --master local[*] \
+ hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
+1000 \
+/usr/local/sbin/hadoop-3.1.0/etc/hadoop/core-site.xml \
+ hdfs://localhost:9000/maintenance/maintenance_data.csv  
+  
+
+
