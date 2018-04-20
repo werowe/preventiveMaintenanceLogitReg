@@ -46,7 +46,7 @@ var file = args(2)
 
 val sqlContext = new SQLContext(sc)
 val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter",";").load(file)
-var header = "pressureInd;moistureInd;temperatureInd;vehicleNo;provider"
+var header = "limetime;pressureInd;moistureInd;temperatureInd;vehicleNo;provider"
 
 val date = new Date()
 var dformat:SimpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
@@ -73,8 +73,9 @@ while (i < records ) {
 var pressureInd =  createData(df.describe("pressureInd"))
 var moistureInd =  createData(df.describe("moistureInd"))
 var temperatureInd =  createData(df.describe("temperatureInd"))
+var lifetime =  createData(df.describe("lifetime"))
 
-var str = pressureInd + ";" + moistureInd + ";" + temperatureInd +";" + r.nextInt(100) + ";" + "Ford F-750"
+var str = lifetime + ";" + pressureInd + ";" + moistureInd + ";" + temperatureInd +";" + r.nextInt(100) + ";" + "Ford F-750"
 
 println (str)
 bw.write(str + "\n")
@@ -85,3 +86,4 @@ bw.close
 
 }
 }
+
