@@ -15,7 +15,7 @@ spark-submit \
   hdfs://localhost:9000/maintenance/maintenance_model
   
   
-** argument are:  how many records to create, where is Hadoop core-site.xml, and what data to use to obtain sampling, i.e. data from above **
+**argument are:  how many records to create, where is Hadoop core-site.xml, and what data to use to obtain sampling, i.e. data from above**
 
 spark-submit \
   --class com.bmc.lr.generateData \
@@ -27,7 +27,7 @@ spark-submit \
   
 
 
-** arguments are: what file to read and which model to use **
+**arguments are: what file to read and which model to use**
 
 spark-submit \
   --class com.bmc.lr.makePrediction \
