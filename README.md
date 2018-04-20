@@ -1,6 +1,6 @@
 # preventiveMaintenanceLogitReg
 
-This reads data and saves a logistic regression model.  The second program then creates data given the mean, stddev, max, and miean of the variables in that training set.  Then the last program runs predictions and prints out those records that are flagged with 1.  So this is a preventive maintenance application.  The data saved in the last step if folder, e.g., /maintenance/2018.04.20.16.26.53.csv/part-00000-b1d37f5f-5021-4368-86fd-d941497d8b52-c000.csv are the vehicles that need maintenance (here I have changed team and provider to me vehicle number and vehicle make, as that makes more sense.)
+This reads data and saves a logistic regression model.  The second program then creates data given the mean, stddev, max, and miean of the variables in that training set.  Then the last program runs predictions and prints out those records that are flagged with 1.  So this is a preventive maintenance application.  The data saved in the last step in folder, e.g., /maintenance/2018.04.20.16.26.53.csv/part-00000-b1d37f5f-5021-4368-86fd-d941497d8b52-c000.csv are the vehicles that need maintenance (here I have changed team and provider to be vehicle number and vehicle make is a more clear description of how you can apply this approach.)
 
 Data is here https://raw.githubusercontent.com/ludovicbenistant/Management-Analytics/master/Supply%20Chain/Maintenance%20(survival%20analysis)/maintenance_data.csv.
 
