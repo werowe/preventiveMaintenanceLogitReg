@@ -1,5 +1,3 @@
-package com.bmc.lr
-
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.SparkContext
@@ -46,7 +44,7 @@ var file = args(2)
 
 val sqlContext = new SQLContext(sc)
 val df = sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").option("delimiter",";").load(file)
-var header = "lifetime;pressureInd;moistureInd;temperatureInd;vehicleNo;provider"
+var header = "lifetime;broken;pressureInd;moistureInd;temperatureInd;team;provider"
 
 val date = new Date()
 var dformat:SimpleDateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
@@ -75,7 +73,7 @@ var moistureInd =  createData(df.describe("moistureInd"))
 var temperatureInd =  createData(df.describe("temperatureInd"))
 var lifetime =  createData(df.describe("lifetime"))
 
-var str = lifetime + ";" + pressureInd + ";" + moistureInd + ";" + temperatureInd +";" + r.nextInt(100) + ";" + "Ford F-750"
+var str = lifetime + ";" + "0" + ";" + pressureInd + ";" + moistureInd + ";" + temperatureInd +";" + r.nextInt(100) + ";" + "Ford F-750"
 
 println (str)
 bw.write(str + "\n")
