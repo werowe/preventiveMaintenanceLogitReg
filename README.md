@@ -4,7 +4,7 @@ This reads data and saves a logistic regression model.  The second program then 
 
 Data is here https://raw.githubusercontent.com/ludovicbenistant/Management-Analytics/master/Supply%20Chain/Maintenance%20(survival%20analysis)/maintenance_data.csv.
 
-
+**arguments are:  csv data file from above, where to save LR model**
 
 spark-submit \
   --verbose \
@@ -12,22 +12,10 @@ spark-submit \
   --master local[*] \
    hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
   hdfs://localhost:9000/maintenance/maintenance_data.csv \
-  hdfs://localhost:9000/maintenance/maintenance_model2
-
-
-
-
-spark-submit \
-  --class com.bmc.lr.makePrediction \
-  --master local[*] \
-   hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
-hdfs://localhost:9000/maintenance/2018.04.20.15.48.54.csv \
-  hdfs://localhost:9000/maintenance/maintenance_model  
+  hdfs://localhost:9000/maintenance/maintenance_model
   
-
-
-
-
+  
+** argument are:  how many records to create, where is Hadoop core-site.xml, and what data to use to obtain sampling, i.e. data from above **
 
 spark-submit \
   --class com.bmc.lr.generateData \
@@ -37,5 +25,17 @@ spark-submit \
 /usr/local/sbin/hadoop-3.1.0/etc/hadoop/core-site.xml \
  hdfs://localhost:9000/maintenance/maintenance_data.csv  
   
+
+
+** arguments are: what file to read and which model to use **
+
+spark-submit \
+  --class com.bmc.lr.makePrediction \
+  --master local[*] \
+   hdfs://localhost:9000/maintenance/lr-assembly-1.0.jar \
+hdfs://localhost:9000/maintenance/2018.04.20.15.48.54.csv \
+  hdfs://localhost:9000/maintenance/maintenance_model  
+  
+
 
 
