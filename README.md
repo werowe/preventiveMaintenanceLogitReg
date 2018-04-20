@@ -27,7 +27,7 @@ spark-submit \
   
 
 
-**arguments are: what file to read and which model to use**
+**arguments are: what file to read, i.e., the one you just generated, and which model to use**
 
 spark-submit \
   --class com.bmc.lr.makePrediction \
