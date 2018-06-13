@@ -2,6 +2,8 @@ name         := "lr"
 version      := "1.0"
 organization := "com.bmc"
 
+assemblyJarName in assembly := "bmclr.jar"
+
 scalaVersion := "2.11.8"
 mainClass := Some("com.bmc.lr")
 
